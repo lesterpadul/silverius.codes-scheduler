@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :scheduled_job_queues
+  resources :scheduled_emails
+  resources :scheduled_tweets
+  devise_for :users
+  root 'home#index'
 end

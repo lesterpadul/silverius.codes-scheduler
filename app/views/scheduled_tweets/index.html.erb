@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Scheduled Tweets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Content</th>
+      <th>Repeating event</th>
+      <th>Scheduled date</th>
+      <th>Scheduled time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @scheduled_tweets.each do |scheduled_tweet| %>
+      <tr>
+        <td><%= scheduled_tweet.status %></td>
+        <td><%= scheduled_tweet.content %></td>
+        <td><%= scheduled_tweet.repeating_event %></td>
+        <td><%= scheduled_tweet.scheduled_date %></td>
+        <td><%= scheduled_tweet.scheduled_time %></td>
+        <td><%= link_to 'Show', scheduled_tweet %></td>
+        <td><%= link_to 'Edit', edit_scheduled_tweet_path(scheduled_tweet) %></td>
+        <td><%= link_to 'Destroy', scheduled_tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Scheduled Tweet', new_scheduled_tweet_path %>

@@ -1,0 +1,32 @@
+<%= form_with(model: scheduled_job_queue, local: true) do |form| %>
+  <% if scheduled_job_queue.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(scheduled_job_queue.errors.count, "error") %> prohibited this scheduled_job_queue from being saved:</h2>
+
+      <ul>
+      <% scheduled_job_queue.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.number_field :status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :schedule_type %>
+    <%= form.number_field :schedule_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :schedule_id %>
+    <%= form.number_field :schedule_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

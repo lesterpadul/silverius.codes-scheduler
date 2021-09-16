@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: 
+  content: MyString
+  repeating_event: 
+  scheduled_date: 2021-09-16
+  scheduled_time: 2021-09-16 09:39:16
+
+two:
+  status: 
+  content: MyString
+  repeating_event: 
+  scheduled_date: 2021-09-16
+  scheduled_time: 2021-09-16 09:39:16

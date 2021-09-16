@@ -1,0 +1,2 @@
+class ScheduledEmail < ApplicationRecord
+end

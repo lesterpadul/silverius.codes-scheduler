@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @scheduled_job_queue.status %>
+</p>
+
+<p>
+  <strong>Schedule type:</strong>
+  <%= @scheduled_job_queue.schedule_type %>
+</p>
+
+<p>
+  <strong>Schedule:</strong>
+  <%= @scheduled_job_queue.schedule_id %>
+</p>
+
+<%= link_to 'Edit', edit_scheduled_job_queue_path(@scheduled_job_queue) %> |
+<%= link_to 'Back', scheduled_job_queues_path %>

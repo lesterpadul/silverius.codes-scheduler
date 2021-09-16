@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @scheduled_email.status %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @scheduled_email.subject %>
+</p>
+
+<p>
+  <strong>Content text:</strong>
+  <%= @scheduled_email.content_text %>
+</p>
+
+<p>
+  <strong>Content html:</strong>
+  <%= @scheduled_email.content_html %>
+</p>
+
+<p>
+  <strong>Repeating event:</strong>
+  <%= @scheduled_email.repeating_event %>
+</p>
+
+<p>
+  <strong>Scheduled date:</strong>
+  <%= @scheduled_email.scheduled_date %>
+</p>
+
+<p>
+  <strong>Scheduled time:</strong>
+  <%= @scheduled_email.scheduled_time %>
+</p>
+
+<%= link_to 'Edit', edit_scheduled_email_path(@scheduled_email) %> |
+<%= link_to 'Back', scheduled_emails_path %>

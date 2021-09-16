@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @scheduled_tweet.status %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @scheduled_tweet.content %>
+</p>
+
+<p>
+  <strong>Repeating event:</strong>
+  <%= @scheduled_tweet.repeating_event %>
+</p>
+
+<p>
+  <strong>Scheduled date:</strong>
+  <%= @scheduled_tweet.scheduled_date %>
+</p>
+
+<p>
+  <strong>Scheduled time:</strong>
+  <%= @scheduled_tweet.scheduled_time %>
+</p>
+
+<%= link_to 'Edit', edit_scheduled_tweet_path(@scheduled_tweet) %> |
+<%= link_to 'Back', scheduled_tweets_path %>

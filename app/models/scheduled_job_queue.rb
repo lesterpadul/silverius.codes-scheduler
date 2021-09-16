@@ -1,0 +1,2 @@
+class ScheduledJobQueue < ApplicationRecord
+end

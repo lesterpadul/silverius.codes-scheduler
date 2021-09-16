@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Scheduled Emails</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Subject</th>
+      <th>Content text</th>
+      <th>Content html</th>
+      <th>Repeating event</th>
+      <th>Scheduled date</th>
+      <th>Scheduled time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @scheduled_emails.each do |scheduled_email| %>
+      <tr>
+        <td><%= scheduled_email.status %></td>
+        <td><%= scheduled_email.subject %></td>
+        <td><%= scheduled_email.content_text %></td>
+        <td><%= scheduled_email.content_html %></td>
+        <td><%= scheduled_email.repeating_event %></td>
+        <td><%= scheduled_email.scheduled_date %></td>
+        <td><%= scheduled_email.scheduled_time %></td>
+        <td><%= link_to 'Show', scheduled_email %></td>
+        <td><%= link_to 'Edit', edit_scheduled_email_path(scheduled_email) %></td>
+        <td><%= link_to 'Destroy', scheduled_email, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Scheduled Email', new_scheduled_email_path %>
