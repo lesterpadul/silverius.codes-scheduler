@@ -1,9 +1,9 @@
 class HomeController < ApplicationController
     before_action :check_auth
 
-    def indexs
+    def index
     end
-
+    
     private
     def check_auth
         if !user_signed_in?
