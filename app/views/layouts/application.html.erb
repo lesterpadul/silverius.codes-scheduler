@@ -45,9 +45,10 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="buttons.html">Twitter</a>
-                            <a class="collapse-item" href="cards.html">Emails</a>
-                            <a class="collapse-item" href="cards.html">Github</a>
+                            <%= link_to scheduled_tweets_path,
+                                :class => "collapse-item" do %>
+                                Twitter
+                            <% end %>
                         </div>
                     </div>
                 </li>
@@ -164,6 +165,7 @@
                     
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
+                        <p id="notice"><%= notice %></p>
                         <%= yield %>
                     </div>
                     <!-- /.container-fluid -->

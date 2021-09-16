@@ -14,6 +14,11 @@ gem 'devise'
 gem 'will_paginate', '~> 3.1.0'
 gem 'fast_jsonapi'
 gem 'webpacker'
+gem 'knock', '~> 2.1'
+gem 'omniauth-auth0', '~> 3.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0' # prevents forged authentication requests
+gem 'omniauth-twitter'
+gem 'omniauth-github'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

@@ -1,9 +1,9 @@
 class ScheduledTweetsController < AdminBaseController
   before_action :set_scheduled_tweet, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /scheduled_tweets
   def index
-    @scheduled_tweets = ScheduledTweet.all
+    @scheduled_tweets = ScheduledTweet.all.paginate(:page => params[:page])
   end
 
   # GET /scheduled_tweets/1

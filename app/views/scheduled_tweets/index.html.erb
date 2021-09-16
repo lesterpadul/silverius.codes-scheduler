@@ -1,8 +1,10 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Scheduled Tweets</h1>
 
-<table>
+
+<%= link_to 'New Scheduled Tweet', new_scheduled_tweet_path %>
+
+<%= will_paginate @posts %>
+<table class="table table-striped table-bordered">
   <thead>
     <tr>
       <th>Status</th>
@@ -24,12 +26,12 @@
         <td><%= scheduled_tweet.scheduled_time %></td>
         <td><%= link_to 'Show', scheduled_tweet %></td>
         <td><%= link_to 'Edit', edit_scheduled_tweet_path(scheduled_tweet) %></td>
-        <td><%= link_to 'Destroy', scheduled_tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'Destroy', scheduled_tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<%= will_paginate @posts %>
 <br>
 
-<%= link_to 'New Scheduled Tweet', new_scheduled_tweet_path %>
+
