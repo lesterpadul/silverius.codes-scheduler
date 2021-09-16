@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_16_104438) do
+ActiveRecord::Schema.define(version: 2021_09_16_154712) do
 
   create_table "scheduled_emails", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "status", default: 0
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_104438) do
     t.time "scheduled_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tweet_id"
     t.index ["repeating_event"], name: "index_scheduled_tweets_on_repeating_event"
     t.index ["status"], name: "index_scheduled_tweets_on_status"
   end

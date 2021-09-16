@@ -11,6 +11,10 @@ services:
             MYSQL_ROOT_PASSWORD: cde3bgt5
         ports:
             - "3306:3306"
+    redis:
+        image: redis:5.0.7
+        ports:
+            - '6379:6379'
     app:
         build: .
         command: bundle exec rails s -p 3000 -b '0.0.0.0' -e development
@@ -22,8 +26,10 @@ services:
             - db
         links:
             - db
+            - redis
         environment:
             DB_USER: root
             DB_NAME: silverius_codes_scheduler
             DB_PASSWORD: cde3bgt5
             DB_HOST: db
+            REDIS_HOST: redis

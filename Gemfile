@@ -19,6 +19,9 @@ gem 'omniauth-auth0', '~> 3.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0' # prevents forged authentication requests
 gem 'omniauth-twitter'
 gem 'omniauth-github'
+gem 'twitter'
+gem 'sidekiq'
+gem 'redis'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

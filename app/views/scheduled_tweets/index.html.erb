@@ -12,7 +12,7 @@
       <th>Repeating event</th>
       <th>Scheduled date</th>
       <th>Scheduled time</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -27,6 +27,11 @@
         <td><%= link_to 'Show', scheduled_tweet %></td>
         <td><%= link_to 'Edit', edit_scheduled_tweet_path(scheduled_tweet) %></td>
         <td><%= button_to 'Destroy', scheduled_tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= button_to '/scheduled_tweets/send', method: :post, params: { tweet_id: scheduled_tweet.id } do%>
+            SEND
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
