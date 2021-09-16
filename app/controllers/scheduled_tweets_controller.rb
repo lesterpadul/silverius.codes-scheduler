@@ -1,4 +1,4 @@
-class ScheduledTweetsController < ApplicationController
+class ScheduledTweetsController < AdminBaseController
   before_action :set_scheduled_tweet, only: [:show, :edit, :update, :destroy]
 
   # GET /scheduled_tweets

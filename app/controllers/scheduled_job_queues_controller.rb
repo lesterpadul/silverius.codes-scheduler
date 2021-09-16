@@ -1,4 +1,4 @@
-class ScheduledJobQueuesController < ApplicationController
+class ScheduledJobQueuesController < AdminBaseController
   before_action :set_scheduled_job_queue, only: [:show, :edit, :update, :destroy]
 
   # GET /scheduled_job_queues

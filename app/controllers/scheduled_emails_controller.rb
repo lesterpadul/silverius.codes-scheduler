@@ -1,4 +1,4 @@
-class ScheduledEmailsController < ApplicationController
+class ScheduledEmailsController < AdminBaseController
   before_action :set_scheduled_email, only: [:show, :edit, :update, :destroy]
 
   # GET /scheduled_emails
