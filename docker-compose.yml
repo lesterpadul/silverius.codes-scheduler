@@ -1,9 +1,11 @@
-version: '2'
+version: '3'
 services:
     db: 
         platform: linux/x86_64
         image: mysql:5.7
         restart: always
+        volumes:
+            - ./devops/mysql/data:/var/lib/mysql
         environment:
             MYSQL_DATABASE: silverius_codes_scheduler
             MYSQL_ROOT_PASSWORD: cde3bgt5

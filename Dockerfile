@@ -24,20 +24,15 @@ RUN npm install -g yarn
 # set working directory
 WORKDIR /myapp
 
+# copy needed gem files
+COPY Gemfile /myapp/Gemfile
+COPY Gemfile.lock /myapp/Gemfile.lock
+RUN bundle install
+
 # copy needed yarn files
 COPY package.json /myapp/package.json
 COPY yarn.lock /myapp/yarn.lock
 RUN yarn install
-
-# copy needed gem files
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
-RUN bundle install
-
-# copy needed gem files
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
-RUN bundle install
 
 # expose port 3000
 EXPOSE 3000
