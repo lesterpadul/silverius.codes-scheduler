@@ -49,10 +49,11 @@ class ScheduledTweetsController < AdminBaseController
         # find tweet item
         tweet_item = ScheduledTweet.find(params[:tweet_id])
         
-        # send tweet
-        TweetJob.perform_later(tweet_item)
+        # set the scheduled time
+        scheduled_time = Date.new(tweet_item.scheduled_date.year,tweet_item.scheduled_date.month,tweet_item.scheduled_date.day) +  Time.parse(tweet_item.scheduled_time.to_s(:time)).seconds_since_midnight.seconds
         
-        # TweetJob.set(wait_until: tweet_item.scheduled_date).perform_later(tweet_item)
+        # set the alternative
+        TweetJob.set(wait_until: scheduled_time).perform_later(tweet_item)
         
         # redirect
         return redirect_to scheduled_tweets_path, :notice => "Tweet added to queue!"
@@ -66,6 +67,6 @@ class ScheduledTweetsController < AdminBaseController
 
     # Only allow a trusted parameter "white list" through.
     def scheduled_tweet_params
-        params.require(:scheduled_tweet).permit(:status, :content, :repeating_event, :scheduled_date, :scheduled_time)
+        params.require(:scheduled_tweet).permit(:status, :content, :repeating_event, :scheduled_date, :scheduled_time, :user_id)
     end
 end

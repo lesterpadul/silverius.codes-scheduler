@@ -2,6 +2,6 @@ class TweetJob < ApplicationJob
     queue_as :default
 
     def perform(tweet)
-        abort "1111111"
+        User::send_tweet(tweet)
     end
 end

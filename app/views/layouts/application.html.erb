@@ -165,7 +165,9 @@
                     
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-                        <p id="notice"><%= notice %></p>
+                        <% unless notice.nil? %>
+                        <div class="alert alert-primary"><%= notice %></div>
+                        <% end %>
                         <%= yield %>
                     </div>
                     <!-- /.container-fluid -->

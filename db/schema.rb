@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_16_154712) do
+ActiveRecord::Schema.define(version: 2021_09_17_091810) do
 
   create_table "scheduled_emails", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "status", default: 0
@@ -46,8 +46,10 @@ ActiveRecord::Schema.define(version: 2021_09_16_154712) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "tweet_id"
+    t.integer "user_id"
     t.index ["repeating_event"], name: "index_scheduled_tweets_on_repeating_event"
     t.index ["status"], name: "index_scheduled_tweets_on_status"
+    t.index ["user_id"], name: "index_scheduled_tweets_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -64,6 +66,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_154712) do
     t.string "twitter_secret"
     t.string "name"
     t.string "image_url"
+    t.string "twitter_user_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

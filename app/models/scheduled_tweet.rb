@@ -1,4 +1,5 @@
 class ScheduledTweet < ApplicationRecord
+    belongs_to :user
 
     # - when initialized, if has no value -> get the time 24 hours from now instead!
     after_initialize do

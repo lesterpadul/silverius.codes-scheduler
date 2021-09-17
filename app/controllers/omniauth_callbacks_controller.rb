@@ -2,7 +2,7 @@ class OmniauthCallbacksController < ApplicationController
     def twitter
         # find user
         auth_user = User.find(current_user.id)
-
+        
         # update
         @check_update = auth_user.update(twitter_auth_params)
 
@@ -17,6 +17,7 @@ class OmniauthCallbacksController < ApplicationController
         params[:twitter_secret] = twitter_auth.credentials.secret
         params[:image_url] = twitter_auth.info.image
         params[:name] = twitter_auth.info.name
-        params.permit(:twitter_token, :twitter_secret, :image_url, :name)
+        params[:twitter_user_name] = twitter_auth.extra.access_token.params[:user_id]
+        params.permit(:twitter_token, :twitter_secret, :image_url, :name, :twitter_user_name)
     end
 end
