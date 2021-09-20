@@ -14,6 +14,10 @@ gem 'devise'
 gem 'will_paginate', '~> 3.1.0'
 gem 'fast_jsonapi'
 gem 'webpacker'
+
+# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
+gem 'turbolinks', '~> 5'
+
 gem 'knock', '~> 2.1'
 gem 'omniauth-auth0', '~> 3.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0' # prevents forged authentication requests
