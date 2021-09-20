@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: silverius_codes_scheduler
-  username: <%= ENV['DB_USER'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
+  username: ec2-52-15-138-215.us-east-2.compute.amazonaws.com
+  username: silverius
+  password: cde3bgt5
