@@ -5,7 +5,7 @@
     <% if scheduled_tweet.errors.any? %>
         <div id="error_explanation" class='alert alert-danger p-bottom-0'>
             <div>
-                <%= pluralize(scheduled_tweet.errors.count, "error") %> prohibited this scheduled_tweet from being saved:
+                <%= pluralize(scheduled_tweet.errors.count, "error") %> prohibited this tweet from being saved:
             </div>
             <ul>
                 <% scheduled_tweet.errors.full_messages.each do |message| %>

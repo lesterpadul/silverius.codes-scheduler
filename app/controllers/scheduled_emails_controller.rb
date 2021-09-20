@@ -1,13 +1,15 @@
 class ScheduledEmailsController < AdminBaseController
   before_action :set_scheduled_email, only: [:show, :edit, :update, :destroy, :new]
+  before_action :set_common_view_name
   expose :scheduled_emails, build_params: :scheduled_email_params
   expose :scheduled_emails_deactivated, -> { ScheduledEmail.where('status = ?', 0) }
 
   # GET /scheduled_emails
   def index
-    Octopus.using(:shard_one) do
-      @scheduled_emails = ScheduledEmail.all.order('id DESC').paginate(:page => params[:page])
-    end
+    @scheduled_emails = ScheduledEmail
+      .where("user_id = ?", current_user.id)
+      .order('id DESC')
+      .paginate(:page => params[:page])
   end
   
   # GET /scheduled_emails/1
@@ -54,6 +56,11 @@ class ScheduledEmailsController < AdminBaseController
 
     # Only allow a trusted parameter "white list" through.
     def scheduled_email_params
-      params.require(:scheduled_email).permit(:status, :subject, :content_text, :content_html, :repeating_event, :scheduled_date, :scheduled_time)
+      params.require(:scheduled_email).permit(:status, :subject, :content_text, :content_html, :repeating_event, :scheduled_date, :scheduled_time, :user_id, :target_emails)
+    end
+
+    # set common view name
+    def set_common_view_name
+      @view_name = "scheduled_tweets"
     end
 end

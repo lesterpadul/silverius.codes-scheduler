@@ -7,7 +7,7 @@ octopus:
         shard_one:
             adapter: mysql2
             host: <%= ENV['DB_HOST'] %>
-            database: silverius_codes_scheduler2
+            database: silverius_codes_scheduler
         shard_two:
             adapter: mysql2
             host: <%= ENV['DB_HOST'] %>

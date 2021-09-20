@@ -40,7 +40,7 @@
             <th class="text-center">ID</th>
             <th class="text-center">Status</th>
             <th class="text-center">Content</th>
-            <th class="text-center" colspan="2">DATE AND TIME</th>
+            <th class="text-center" colspan="2">Date and Time</th>
             <th class="text-center" colspan="4"></th>
         </tr>
     </thead>
@@ -73,7 +73,7 @@
                 </td>
                 <td>
                     <%= button_to '/scheduled_tweets/send', 
-                        :class=> "btn btn-primary btn-sm #{scheduled_tweet.status != 0 ? "disabled" : ""}", 
+                        :class=> "btn btn-primary btn-sm ", 
                         :disabled=> scheduled_tweet.status != 0 ? true : false,
                         method: :post, 
                         params: { tweet_id: scheduled_tweet.id } do%>

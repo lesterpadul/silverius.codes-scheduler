@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_17_091810) do
+ActiveRecord::Schema.define(version: 2021_09_20_130022) do
 
   create_table "scheduled_emails", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "status", default: 0
@@ -22,8 +22,11 @@ ActiveRecord::Schema.define(version: 2021_09_17_091810) do
     t.time "scheduled_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.string "target_emails", default: "", null: false
     t.index ["repeating_event"], name: "index_scheduled_emails_on_repeating_event"
     t.index ["status"], name: "index_scheduled_emails_on_status"
+    t.index ["user_id"], name: "index_scheduled_emails_on_user_id"
   end
 
   create_table "scheduled_job_queues", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|

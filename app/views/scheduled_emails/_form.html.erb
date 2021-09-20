@@ -1,52 +1,63 @@
 <%= form_with(model: scheduled_email, local: true) do |form| %>
-  <% if scheduled_email.errors.any? %>
+    <%= form.hidden_field :repeating_event %>
+    <%= form.hidden_field :status %>
+    <%= form.hidden_field :user_id, :value => current_user.id %>
+    <% if scheduled_email.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(scheduled_email.errors.count, "error") %> prohibited this scheduled_email from being saved:</h2>
-
-      <ul>
-      <% scheduled_email.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <div>
+            <%= pluralize(scheduled_email.errors.count, "error") %> prohibited this email from being saved:
+        </div>
+        <ul>
+            <% scheduled_email.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+        </ul>
     </div>
-  <% end %>
+    <% end %>
+    
+    <!-- main body-->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Email Info</h6>
+        </div>
 
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.number_field :status %>
-  </div>
+        <div class="card-body">
+            <h4 class="font-weight-bold">
+                Target Emails
+                <small>(To add multiple emails, separate them by commas)</small>
+            </h4>
+            <div class="mb-4">
+                <%= form.text_field :target_emails, :class => "form-control" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :subject %>
-    <%= form.text_field :subject %>
-  </div>
+            <h4 class="font-weight-bold">Subject</h4>
+            <div class="mb-4">
+                <%= form.text_field :subject, :class => "form-control" %>
+            </div>
 
-  <div class="field">
-    <%= form.label :content_text %>
-    <%= form.text_field :content_text %>
-  </div>
+            <h4 class="font-weight-bold">Content HTML</h4>
+            <div class="mb-4">
+                <%= form.text_area :content_html, 
+                :class=>"form-control",
+                "rows" => 5 %>
+            </div>
 
-  <div class="field">
-    <%= form.label :content_html %>
-    <%= form.text_field :content_html %>
-  </div>
+            <h4 class="font-weight-bold">Content Text</h4>
+            <div class="mb-4">
+                <%= form.text_area :content_text, 
+                :class=>"form-control",
+                "rows" => 5 %>
+            </div>
 
-  <div class="field">
-    <%= form.label :repeating_event %>
-    <%= form.number_field :repeating_event %>
-  </div>
+            <h4 class="font-weight-bold">Date and Time</h4>
+                <div class="mb-4">
+                <%= form.date_select :scheduled_date %>
+                ~
+                <%= form.time_select :scheduled_time %>
+            </div>
 
-  <div class="field">
-    <%= form.label :scheduled_date %>
-    <%= form.date_select :scheduled_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :scheduled_time %>
-    <%= form.time_select :scheduled_time %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+            <!-- submit -->
+            <%= form.submit :class => "btn btn-primary btn-block" %>
+        </div>
+    </div>
 <% end %>
