@@ -4,6 +4,10 @@
         <title>Myapp</title>
         <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
+
+        <!-- tag for bootstrap picker -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
         <!-- Custom fonts for this template-->
         <link 
             href="/sb_admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -13,21 +17,28 @@
 
         <!-- Custom styles for this template-->
         <link href="/sb_admin/css/sb-admin-2.min.css" rel="stylesheet">
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="/sb_admin/vendor/jquery/jquery.min.js"></script>
+        <script src="/sb_admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="/sb_admin/vendor/jquery-easing/jquery.easing.min.js"></script>
     </head>
     <body>
         <!-- Page Wrapper -->
         <div id="wrapper">
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                     <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
+                        <i class="fas fa-cat"></i>
                     </div>
-                    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                    <div class="sidebar-brand-text mx-3">RoR Admin</div>
                 </a>
-
+                
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
                 
@@ -43,7 +54,7 @@
                         <i class="fas fa-fw fa-cog"></i>
                         <span>Scheduler</span>
                     </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div id="scheduled_tweets_section" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <%= link_to scheduled_tweets_path,
                                 :class => "collapse-item" do %>
@@ -144,15 +155,17 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-        
-        <!-- Bootstrap core JavaScript-->
-        <script src="/sb_admin/vendor/jquery/jquery.min.js"></script>
-        <script src="/sb_admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-        <!-- Core plugin JavaScript-->
-        <script src="/sb_admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
         <!-- Custom scripts for all pages-->
         <script src="/sb_admin/js/sb-admin-2.min.js"></script>
+        <script>
+            var view_name = "<%= @view_name %>";
+            $(function(){
+                // - if has section name
+                if ($('#' + view_name + '_section').length) {
+                    $('#' + view_name + '_section').toggle("collapse");
+                }
+            });
+        </script>
     </body>
 </html>

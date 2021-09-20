@@ -7,6 +7,16 @@
 <!-- horizontal line -->
 <hr />
 
+<% if current_user.twitter_token.nil? %>
+<div class="row">
+    <div class="col-12">
+        <div class="alert alert-danger">
+            Please link your <%= link_to edit_user_registration_path do %>account<% end %> to twitter!
+        </div>
+    </div>
+</div>
+<% end %>
+
 <!-- pagination -->
 <div class="row mb-4">
     <div class="col-6">
@@ -15,7 +25,9 @@
         </div>
     </div>
     <div class="col-6">
-         <%= link_to new_scheduled_tweet_path, :class => "float-right btn btn-primary shadow-sm"  do %>
+        <%= link_to new_scheduled_tweet_path, 
+            :class => "float-right btn btn-primary shadow-sm #{current_user.twitter_token.nil? ? "disabled" : ""}",
+            :disable => current_user.twitter_token.nil? ? true : false  do %>
             <i class="fas fa-plus fa-sm text-white-50"></i> Create Schedule
         <% end %>
     </div>
@@ -33,28 +45,51 @@
         </tr>
     </thead>
     <tbody>
-        <% @scheduled_tweets.each do |scheduled_tweet| %>
-        <tr>
-            <td><%= scheduled_tweet.id %></td>
-            <td><%= ScheduledTweet::schedule_status[scheduled_tweet.status] %></td>
-            <td><%= scheduled_tweet.content %></td>
-            <td><%= scheduled_tweet.scheduled_date %></td>
-            <td><%= scheduled_tweet.scheduled_time.to_s(:time) %></td>
-            <td>
-                <%= link_to 'SHOW', scheduled_tweet, :class=> "btn btn-info btn-sm" %>
-            </td>
-            <td>
-                <%= link_to 'EDIT', edit_scheduled_tweet_path(scheduled_tweet), :class=> "btn btn-dark btn-sm" %>
-            </td>
-            <td>
-                <%= button_to 'DESTROY', scheduled_tweet, :class=> "btn btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
-            </td>
-            <td>
-                <%= button_to '/scheduled_tweets/send', :class=> "btn btn-primary btn-sm", method: :post, params: { tweet_id: scheduled_tweet.id } do%>
-                    SEND
-                <% end %>
-            </td>
-        </tr>
+        <% if @scheduled_tweets.empty? == false %>
+            <% @scheduled_tweets.each do |scheduled_tweet| %>
+            <tr>
+                <td><%= scheduled_tweet.id %></td>
+                <td><%= ScheduledTweet::schedule_status[scheduled_tweet.status] %></td>
+                <td><%= scheduled_tweet.content %></td>
+                <td><%= scheduled_tweet.scheduled_date %></td>
+                <td><%= scheduled_tweet.scheduled_time.to_s(:time) %></td>
+                <td>
+                    <%= link_to 'SHOW', scheduled_tweet, :class=> "btn btn-info btn-sm" %>
+                </td>
+                <td>
+                    <%= link_to 'EDIT', 
+                        edit_scheduled_tweet_path(scheduled_tweet), 
+                        :class=> "btn btn-dark btn-sm #{scheduled_tweet.status != 0 ? "disabled" : ""}",
+                        :disabled=> scheduled_tweet.status != 0 ? true : false
+                    %>
+                </td>
+                <td>
+                    <%= button_to 'DESTROY', 
+                        scheduled_tweet, 
+                        :class=> "btn btn-danger btn-sm #{scheduled_tweet.status != 0 ? "disabled" : ""}",
+                        :disabled=> scheduled_tweet.status != 0 ? true : false,
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %>
+                </td>
+                <td>
+                    <%= button_to '/scheduled_tweets/send', 
+                        :class=> "btn btn-primary btn-sm #{scheduled_tweet.status != 0 ? "disabled" : ""}", 
+                        :disabled=> scheduled_tweet.status != 0 ? true : false,
+                        method: :post, 
+                        params: { tweet_id: scheduled_tweet.id } do%>
+                        SEND
+                    <% end %>
+                </td>
+            </tr>
+            <% end %>
+        <% else %>
+            <tr>
+                <td colspan=9 class="text-center">
+                    <div class="p-4 text-wrap fw-bold">
+                        No scheduled tweets! 
+                    </div>
+                </td>
+            </tr>
         <% end %>
     </tbody>
 </table>
