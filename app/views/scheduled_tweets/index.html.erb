@@ -2,18 +2,22 @@
     <div class="col-6">
         <h1 class="float-left">Scheduled Tweets</h1>
     </div>
-    <div class="col-6">
-        <%= link_to new_scheduled_tweet_path, :class => "float-right btn btn-sm btn-primary shadow-sm"  do %>
-            <i class="fas fa-plus fa-sm text-white-50"></i> Create Schedule
-        <% end %>
-    </div>
 </div>
-<hr/>
+
+<!-- horizontal line -->
+<hr />
 
 <!-- pagination -->
-<div class="clearfix">
-    <div class="d-flex justify-content-center mb-4">
-        <%= will_paginate @posts, list_classes: %w(pagination justify-content-end) %>
+<div class="row mb-4">
+    <div class="col-6">
+        <div class="d-flex justify-content-start">
+            <%= will_paginate @posts, list_classes: %w(pagination justify-content-end) %>
+        </div>
+    </div>
+    <div class="col-6">
+         <%= link_to new_scheduled_tweet_path, :class => "float-right btn btn-primary shadow-sm"  do %>
+            <i class="fas fa-plus fa-sm text-white-50"></i> Create Schedule
+        <% end %>
     </div>
 </div>
 
@@ -21,9 +25,9 @@
 <table class="table table-striped table-bordered mb-4">
     <thead>
         <tr>
+            <th class="text-center">ID</th>
             <th class="text-center">Status</th>
             <th class="text-center">Content</th>
-            <th class="text-center">TYPE</th>
             <th class="text-center" colspan="2">DATE AND TIME</th>
             <th class="text-center" colspan="4"></th>
         </tr>
@@ -31,9 +35,9 @@
     <tbody>
         <% @scheduled_tweets.each do |scheduled_tweet| %>
         <tr>
+            <td><%= scheduled_tweet.id %></td>
             <td><%= ScheduledTweet::schedule_status[scheduled_tweet.status] %></td>
             <td><%= scheduled_tweet.content %></td>
-            <td><%= ScheduledTweet::schedule_status[scheduled_tweet.repeating_event] %></td>
             <td><%= scheduled_tweet.scheduled_date %></td>
             <td><%= scheduled_tweet.scheduled_time.to_s(:time) %></td>
             <td>
@@ -56,8 +60,11 @@
 </table>
 
 <!-- pagination -->
-<div class="clearfix">
-    <div class="d-flex justify-content-center">
-        <%= will_paginate @posts, list_classes: %w(pagination justify-content-end) %>
+<div class="row">
+    <div class="col-6">
+        <div class="d-flex justify-content-start">
+            <%= will_paginate @posts, list_classes: %w(pagination justify-content-end) %>
+        </div>
     </div>
+    <div class="col-6"></div>
 </div>

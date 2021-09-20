@@ -44,10 +44,16 @@
                 <!-- social links -->
                 <hr>
                 <%= button_to '/auth/twitter', 
-                        :class => "#{current_user.twitter_token.nil? ? "" : "disabled"} btn btn-primary btn-user btn-block",
+                        :class => "#{current_user.twitter_token.nil? ? "" : "disabled"} btn btn-primary btn-user btn-block mb-4",
                         :disabled => current_user.twitter_token.nil? ? false : true,
                         method: :post do%>
                     <i class="fab fa-twitter fa-fw"></i> LINK TWITTER
+                <% end %>
+                <%= button_to '/auth/github', 
+                        :class => "#{current_user.github_token.nil? ? "" : "disabled"} btn btn-dark btn-user btn-block",
+                        :disabled => current_user.github_token.nil? ? false : true,
+                        method: :post do%>
+                    <i class="fab fa-github fa-fw"></i> LINK GITHUB
                 <% end %>
                 
                 <!-- disable account -->

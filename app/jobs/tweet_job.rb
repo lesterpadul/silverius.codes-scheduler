@@ -2,6 +2,9 @@ class TweetJob < ApplicationJob
     queue_as :default
 
     def perform(tweet)
-        User::send_tweet(tweet)
+        begin
+            User::send_tweet(tweet)
+        rescue => e
+        end
     end
 end

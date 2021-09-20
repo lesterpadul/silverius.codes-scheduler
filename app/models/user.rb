@@ -5,8 +5,30 @@ class User < ApplicationRecord
     has_many :scheduled_tweet, foreign_key: "user_id"
 
     def self.send_tweet (tweet_item)
+        # return if does exist
+        if !tweet_item
+            return false
+        end
+        
+        # return if not nil, so as to avoid re-sending!
+        if !tweet_item.tweet_id.nil?
+            return false
+        end
+        
+        # return if status is already done
+        if tweet_item.status == 1
+            return false
+        end
+        
         # update tweet item
-        tweet_item_res = twitter_client(tweet_item.user).update(tweet_item.content)
+        tweet_item_res = twitter_client(tweet_item.user).update("#{tweet_item.content} - #{tweet_item.scheduled_time.to_s(:time)}")
+        
+        # update information
+        tweet_item.status = 2 # done
+        tweet_item.tweet_id = tweet_item_res.id
+
+        # save information
+        return tweet_item.save
     end
     
     def self.twitter_client(tweet_item_user)

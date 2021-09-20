@@ -23,6 +23,8 @@ gem 'twitter'
 gem 'sidekiq'
 gem 'redis'
 gem 'will_paginate-bootstrap-style'
+gem 'decent_exposure', '~> 3.0'
+gem 'ar-octopus'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

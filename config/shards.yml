@@ -1,0 +1,20 @@
+octopus:
+    environments:
+        - development
+        - production
+    
+    development:
+        shard_one:
+            adapter: mysql2
+            host: <%= ENV['DB_HOST'] %>
+            database: silverius_codes_scheduler2
+        shard_two:
+            adapter: mysql2
+            host: <%= ENV['DB_HOST'] %>
+            database: silverius_codes_scheduler
+
+    production:
+        shard_one:
+            adapter: mysql2
+            host: <%= ENV['DB_HOST'] %>
+            database: silverius_codes_scheduler

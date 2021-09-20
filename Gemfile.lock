@@ -44,6 +44,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    ar-octopus (0.10.2)
+      activerecord (>= 4.2.0)
+      activesupport (>= 4.2.0)
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
@@ -76,6 +79,8 @@ GEM
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
     crass (1.0.6)
+    decent_exposure (3.0.4)
+      activesupport (>= 4.0)
     devise (4.8.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -311,11 +316,13 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  ar-octopus
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  decent_exposure (~> 3.0)
   devise
   fast_jsonapi
   knock (~> 2.1)

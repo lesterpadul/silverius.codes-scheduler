@@ -28,6 +28,7 @@ services:
             - db
             - redis
         environment:
+            TZ: Asia/Singapore
             DB_USER: root
             DB_NAME: silverius_codes_scheduler
             DB_PASSWORD: cde3bgt5

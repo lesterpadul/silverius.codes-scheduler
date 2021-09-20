@@ -1,0 +1,2 @@
+class BatchMailer < ApplicationMailer
+end
