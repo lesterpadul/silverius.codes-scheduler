@@ -48,7 +48,9 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  adapter: mysql2
   database: silverius_codes_scheduler
   host: "ec2-52-15-138-215.us-east-2.compute.amazonaws.com"
   username: silverius
