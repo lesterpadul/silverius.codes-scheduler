@@ -91,6 +91,14 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'silverius-codes-ror.herokuapp.com', port: 443 }
   config.active_job.queue_adapter = :sidekiq
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => "padullester@gmail.com",
+    :password             => "L12e5s19t20",
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
 end

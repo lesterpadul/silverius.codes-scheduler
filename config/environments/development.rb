@@ -40,4 +40,13 @@ Rails.application.configure do
   config.serve_static_assets = false
   config.reload_classes_only_on_change = false
   config.active_job.queue_adapter = :sidekiq
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => "padullester@gmail.com",
+    :password             => "ghndvainsqpjicrf",
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
+  config.action_mailer.delivery_method = :smtp
 end

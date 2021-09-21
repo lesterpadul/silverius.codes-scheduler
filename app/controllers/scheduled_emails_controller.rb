@@ -3,6 +3,7 @@ class ScheduledEmailsController < AdminBaseController
   before_action :set_common_view_name
   expose :scheduled_emails, build_params: :scheduled_email_params
   expose :scheduled_emails_deactivated, -> { ScheduledEmail.where('status = ?', 0) }
+  expose :scheduled_email
 
   # GET /scheduled_emails
   def index
@@ -15,7 +16,7 @@ class ScheduledEmailsController < AdminBaseController
     unless params[:status].nil? || params[:status].empty?
         @scheduled_emails = @scheduled_emails.where("status = ?", params[:status])
     end
-
+    
     @scheduled_emails = @scheduled_emails.where("user_id = ?", current_user.id)
       .paginate(:page => params[:page])
   end
@@ -32,9 +33,25 @@ class ScheduledEmailsController < AdminBaseController
   def edit
   end
 
+  def send_email
+    mail_status = BatchMailer.with(scheduled_email).batch_email
+    redirect_to scheduled_emails_path, notice: 'Email sent!'
+  end
+  
   # POST /scheduled_emails
   def create
     if scheduled_emails.save
+
+      # set the scheduled time
+      scheduled_time = Date.new(
+        scheduled_emails.scheduled_date.year,
+        scheduled_emails.scheduled_date.month,
+        scheduled_emails.scheduled_date.day) + Time.parse(scheduled_emails.scheduled_time.to_s(:time)).seconds_since_midnight.seconds
+      
+      # set the alternative
+      EmailJob.set(wait_until: scheduled_time).perform_later(scheduled_emails)
+      
+      # redirect to
       redirect_to scheduled_emails, notice: 'Scheduled email was successfully created.'
     else
       render :new
@@ -44,6 +61,16 @@ class ScheduledEmailsController < AdminBaseController
   # PATCH/PUT /scheduled_emails/1
   def update
     if scheduled_emails.update(scheduled_email_params)
+      # set the scheduled time
+      scheduled_time = Date.new(
+        scheduled_emails.scheduled_date.year,
+        scheduled_emails.scheduled_date.month,
+        scheduled_emails.scheduled_date.day) + Time.parse(scheduled_emails.scheduled_time.to_s(:time)).seconds_since_midnight.seconds
+      
+      # set the alternative
+      EmailJob.set(wait_until: scheduled_time).perform_later(scheduled_emails)
+      
+      # redirect to
       redirect_to scheduled_emails, notice: 'Scheduled email was successfully updated.'
     else
       render :edit
