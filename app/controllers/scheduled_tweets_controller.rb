@@ -1,11 +1,22 @@
 class ScheduledTweetsController < AdminBaseController
     before_action :set_scheduled_tweet, only: [:show, :edit, :update, :destroy]
+    before_action :set_common_parameters
 
     # GET /scheduled_tweets
     def index
-        @scheduled_tweets = ScheduledTweet
+        @scheduled_tweets = ScheduledTweet.order('id DESC')
+
+        unless params[:subject].nil? || params[:subject].empty?
+            @scheduled_tweets = @scheduled_tweets.where("content like '%#{params[:subject]}%'")
+        end
+
+        unless params[:status].nil? || params[:status].empty?
+            @scheduled_tweets = @scheduled_tweets.where("status = ?", params[:status])
+        end
+
+        @scheduled_tweets = @scheduled_tweets
             .where("user_id = ?", current_user.id)
-            .order('id DESC').paginate(:page => params[:page])
+            .paginate(:page => params[:page])
     end
     
     # GET /scheduled_tweets/1
@@ -84,13 +95,17 @@ class ScheduledTweetsController < AdminBaseController
     end
 
     private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_scheduled_tweet
-        @scheduled_tweet = ScheduledTweet.find(params[:id])
-    end
+        # Use callbacks to share common setup or constraints between actions.
+        def set_scheduled_tweet
+            @scheduled_tweet = ScheduledTweet.find(params[:id])
+        end
 
-    # Only allow a trusted parameter "white list" through.
-    def scheduled_tweet_params
-        params.require(:scheduled_tweet).permit(:status, :content, :repeating_event, :scheduled_date, :scheduled_time, :user_id)
-    end
+        # Only allow a trusted parameter "white list" through.
+        def scheduled_tweet_params
+            params.require(:scheduled_tweet).permit(:status, :content, :repeating_event, :scheduled_date, :scheduled_time, :user_id)
+        end
+
+        def set_common_parameters
+            @params = params
+        end
 end

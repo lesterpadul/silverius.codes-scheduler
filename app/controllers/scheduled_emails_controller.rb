@@ -6,9 +6,17 @@ class ScheduledEmailsController < AdminBaseController
 
   # GET /scheduled_emails
   def index
-    @scheduled_emails = ScheduledEmail
-      .where("user_id = ?", current_user.id)
-      .order('id DESC')
+    @scheduled_emails = ScheduledEmail.order('id DESC')
+
+    unless params[:subject].nil? || params[:subject].empty?
+        @scheduled_emails = @scheduled_emails.where("subject like '%#{params[:subject]}%'")
+    end
+
+    unless params[:status].nil? || params[:status].empty?
+        @scheduled_emails = @scheduled_emails.where("status = ?", params[:status])
+    end
+
+    @scheduled_emails = @scheduled_emails.where("user_id = ?", current_user.id)
       .paginate(:page => params[:page])
   end
   
@@ -62,5 +70,6 @@ class ScheduledEmailsController < AdminBaseController
     # set common view name
     def set_common_view_name
       @view_name = "scheduled_tweets"
+      @params = params
     end
 end
