@@ -48,5 +48,5 @@ Rails.application.configure do
     :authentication       => "plain",
     :enable_starttls_auto => true
   }
-  config.action_mailer.delivery_method = :smtp
+  config.web_console.whiny_requests = false
 end
