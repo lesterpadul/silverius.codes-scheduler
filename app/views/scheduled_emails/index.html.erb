@@ -43,14 +43,34 @@
                 <td><%= scheduled_email.subject %></td>
                 <td><%= scheduled_email.scheduled_date %></td>
                 <td><%= scheduled_email.scheduled_time.to_s(:time) %></td>
-                <td><%= link_to 'Show', scheduled_email, :class=> "btn btn-info btn-sm"%></td>
-                <td><%= link_to 'Edit', edit_scheduled_email_path(scheduled_email), :class=> "btn btn-primary btn-sm" %></td>
-                <td><%= button_to 'Destroy', scheduled_email, method: :delete, data: { confirm: 'Are you sure?' }, :class=> "btn btn-danger btn-sm" %></td>
+                <td>
+                    <%= link_to 'Show',
+                        scheduled_email, 
+                        :class=> "btn btn-info btn-sm"
+                    %>
+                </td>
+                <td>
+                    <%= link_to 'Edit', 
+                        edit_scheduled_email_path(scheduled_email), 
+                        :class=> "btn btn-primary btn-sm #{scheduled_email.status != 0 ? "disabled" : ""}",
+                        :disabled=> scheduled_email.status != 0 ? true : false
+                    %>
+                </td>
+                <td>
+                    <%= button_to 'Destroy', 
+                        scheduled_email, 
+                        method: :delete, 
+                        data: { confirm: 'Are you sure?' }, 
+                        :class=> "btn btn-danger btn-sm",
+                        :disabled=> scheduled_email.status != 0 ? true : false
+                    %>
+                </td>
                 <td>
                     <%= button_to '/scheduled_emails/send',
                         method: :post, 
                         data: { confirm: 'Are you sure?' }, 
                         params: {id: scheduled_email.id},
+                        :disabled=> scheduled_email.status != 0 ? true : false,
                         :class=> "btn btn-primary btn-sm" do%>
                         Send
                     <% end %>
