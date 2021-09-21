@@ -35,6 +35,8 @@ class ScheduledEmailsController < AdminBaseController
 
   def send_email
     mail_status = BatchMailer.with(scheduled_email).batch_email
+    config.log_level = :warn
+    logger.debug "EMAIL DEBUG ---------- \n #{mail_status} \n EMAIL DEBUG ---------- \n "
     redirect_to scheduled_emails_path, notice: 'Email sent!'
   end
   
