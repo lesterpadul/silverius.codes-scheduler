@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_09_20_130022) do
 
-  create_table "scheduled_emails", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "scheduled_emails", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "status", default: 0
     t.string "subject"
     t.string "content_text"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2021_09_20_130022) do
     t.index ["user_id"], name: "index_scheduled_emails_on_user_id"
   end
 
-  create_table "scheduled_job_queues", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "scheduled_job_queues", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "status", default: 0
     t.integer "schedule_type", default: 0, null: false
     t.integer "schedule_id", default: 0, null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2021_09_20_130022) do
     t.index ["status"], name: "index_scheduled_job_queues_on_status"
   end
 
-  create_table "scheduled_tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "scheduled_tweets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "status", default: 0
     t.string "content"
     t.integer "repeating_event", default: 0
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2021_09_20_130022) do
     t.index ["user_id"], name: "index_scheduled_tweets_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
