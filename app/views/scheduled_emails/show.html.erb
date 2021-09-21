@@ -1,39 +1,51 @@
-<p id="notice"><%= notice %></p>
+<%= form_with(model: @scheduled_email, local: true) do |form| %>
+    <!-- main body-->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Email Info</h6>
+        </div>
 
-<p>
-  <strong>Status:</strong>
-  <%= @scheduled_email.status %>
-</p>
+        <div class="card-body">
+            <h4 class="font-weight-bold">
+                Target Emails
+                <small>(To add multiple emails, separate them by commas)</small>
+            </h4>
+            <div class="mb-4">
+                <%= form.text_field :target_emails, 
+                "readonly" => true,
+                :class => "form-control" %>
+            </div>
 
-<p>
-  <strong>Subject:</strong>
-  <%= @scheduled_email.subject %>
-</p>
+            <h4 class="font-weight-bold">Subject</h4>
+            <div class="mb-4">
+                <%= form.text_field :subject, 
+                "readonly" => true,
+                :class => "form-control" %>
+            </div>
 
-<p>
-  <strong>Content text:</strong>
-  <%= @scheduled_email.content_text %>
-</p>
+            <h4 class="font-weight-bold">Content HTML</h4>
+            <div class="mb-4">
+                <%= form.text_area :content_html, 
+                :class=>"form-control",
+                "readonly" => true,
+                "rows" => 5 %>
+            </div>
 
-<p>
-  <strong>Content html:</strong>
-  <%= @scheduled_email.content_html %>
-</p>
+            <h4 class="font-weight-bold">Content Text</h4>
+            <div class="mb-4">
+                <%= form.text_area :content_text, 
+                :class=>"form-control",
+                "readonly" => true,
+                "rows" => 5 %>
+            </div>
 
-<p>
-  <strong>Repeating event:</strong>
-  <%= @scheduled_email.repeating_event %>
-</p>
-
-<p>
-  <strong>Scheduled date:</strong>
-  <%= @scheduled_email.scheduled_date %>
-</p>
-
-<p>
-  <strong>Scheduled time:</strong>
-  <%= @scheduled_email.scheduled_time %>
-</p>
-
+            <h4 class="font-weight-bold">Date and Time</h4>
+                <div class="mb-4">
+                <%= @scheduled_email.scheduled_date %>
+                <%= @scheduled_email.scheduled_time.to_s(:time) %>
+            </div>
+        </div>
+    </div>
+<% end %>
 <%= link_to 'Edit', edit_scheduled_email_path(@scheduled_email) %> |
 <%= link_to 'Back', scheduled_emails_path %>

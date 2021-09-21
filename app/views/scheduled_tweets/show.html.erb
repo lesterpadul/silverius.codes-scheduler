@@ -1,29 +1,26 @@
-<p id="notice"><%= notice %></p>
+<%= form_with(model: @scheduled_tweet, local: true) do |form| %>
+    <!-- main body-->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tweet Info</h6>
+        </div>
 
-<p>
-  <strong>Status:</strong>
-  <%= @scheduled_tweet.status %>
-</p>
+        <div class="card-body">
+            <h4 class="font-weight-bold">Content</h4>
+            <div class="mb-4">
+                <%= form.text_area :content, 
+                    :class => "form-control",
+                    "readonly" => true,
+                    "rows" => 5 %>
+            </div>
 
-<p>
-  <strong>Content:</strong>
-  <%= @scheduled_tweet.content %>
-</p>
-
-<p>
-  <strong>Repeating event:</strong>
-  <%= @scheduled_tweet.repeating_event %>
-</p>
-
-<p>
-  <strong>Scheduled date:</strong>
-  <%= @scheduled_tweet.scheduled_date %>
-</p>
-
-<p>
-  <strong>Scheduled time:</strong>
-  <%= @scheduled_tweet.scheduled_time %>
-</p>
-
+            <h4 class="font-weight-bold">Date and Time</h4>
+            <div class="mb-4">
+              <%= @scheduled_tweet.scheduled_date %>
+              <%= @scheduled_tweet.scheduled_time.to_s(:time) %>
+            </div>
+        </div>
+    </div>
+<% end %>
 <%= link_to 'Edit', edit_scheduled_tweet_path(@scheduled_tweet) %> |
 <%= link_to 'Back', scheduled_tweets_path %>
