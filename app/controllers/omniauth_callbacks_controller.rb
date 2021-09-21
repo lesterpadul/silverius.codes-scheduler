@@ -15,10 +15,9 @@ class OmniauthCallbacksController < ApplicationController
         twitter_auth = request.env['omniauth.auth']
         params[:twitter_token] = twitter_auth.credentials.token
         params[:twitter_secret] = twitter_auth.credentials.secret
-        params[:image_url] = twitter_auth.info.image
         params[:name] = twitter_auth.info.name
         params[:twitter_user_name] = twitter_auth.extra.access_token.params[:user_id]
-        params.permit(:twitter_token, :twitter_secret, :image_url, :name, :twitter_user_name)
+        params.permit(:twitter_token, :twitter_secret, :name, :twitter_user_name)
     end
 
     def github

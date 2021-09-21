@@ -32,7 +32,7 @@ class ScheduledEmailsController < AdminBaseController
   # GET /scheduled_emails/1/edit
   def edit
   end
-
+  
   def send_email
     mail_status = BatchMailer.with(scheduled_email).batch_email
     config.log_level = :warn

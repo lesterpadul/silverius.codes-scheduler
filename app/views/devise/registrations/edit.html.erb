@@ -1,7 +1,14 @@
 <div class="card-body shadow p-0">
     <!-- Nested Row within Card Body -->
     <div class="row" style="margin-left: 0px; margin-right: 0px;">
-        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+        <div class="col-lg-5 d-none d-lg-block bg-register-image" style="position: relative; background: url(<%= url_for(current_user.image_url.attached? ? current_user.image_url : "/sb_admin/img/undraw_profile.svg") %>); background-size: cover; background-position: center;">
+            <button 
+                style="position: absolute; top: 10px; left: 10px;"
+                class="btn btn-primary rounded-0">
+                <i class="fas fa-camera"></i>
+                &nbsp;Upload Photo
+            </button>
+        </div>
         <div class="col-lg-7">
             <div class="p-5">
                 <div class="text-center">
@@ -13,7 +20,6 @@
                 
                 <!-- form login -->
                 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, :class => "user") do |f| %>
-
                     <div class="form-group row">
                         <div class="col-sm-12 mb-3 mb-sm-0">
                             <%= f.text_field :name, :class => "form-control form-control-user",:placeholder => "Name"%>
@@ -38,6 +44,8 @@
                             <%= f.password_field :current_password, autocomplete: "current-password", :class => "form-control form-control-user", :placeholder => "Current Password" %>
                         </div>
                     </div>
+                    <%= f.label "Photo" %>
+                    <%= f.file_field :image_url %>
                     <%= f.submit "UPDATE", :class => "btn btn-primary btn-user btn-block mb-4"%>
                 <% end %>
                 
