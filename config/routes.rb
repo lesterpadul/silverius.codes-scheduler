@@ -7,4 +7,9 @@ Rails.application.routes.draw do
   resources :scheduled_tweets
   devise_for :users
   root 'scheduled_tweets#index'
+  
+  # name space API
+  namespace :api do
+    resources :users
+  end
 end

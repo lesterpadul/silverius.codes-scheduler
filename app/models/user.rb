@@ -4,7 +4,7 @@ class User < ApplicationRecord
     devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
     has_many :scheduled_tweet, foreign_key: "user_id"
     has_one_attached :image_url
-
+    
     def self.send_tweet (tweet_item)
         # return if does exist
         if !tweet_item
@@ -40,7 +40,7 @@ class User < ApplicationRecord
             config.access_token_secret = tweet_item_user.twitter_secret
         end
     end
-
+    
     def get_image_url
         if self.image_url.attached?
             (self.image_url)
