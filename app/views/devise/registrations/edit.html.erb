@@ -67,6 +67,7 @@
 </div>
 <script>
     window.reactInit = {
+        userID: "<%= current_user.id %>",
         imageUrl: window.location.origin + "<%= url_for(current_user.image_url.attached? ? current_user.image_url : "/sb_admin/img/undraw_profile.svg") %>"
     }
 </script>

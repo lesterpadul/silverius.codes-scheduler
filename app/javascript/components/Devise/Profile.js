@@ -15,15 +15,17 @@ const Profile = function(){
     
     // - catch when the progress is updated
     useEffect(function(){
-        console.warn()
+        console.warn("setting image url -> " + imageUrl)
 
-    }, [imgProgress]);
+    }, [imageUrl]);
 
     // - if loaded
     if (!loaded) {
         setImageUrl(reactInit.imageUrl)
         setLoaded(true)
     }
+
+    console.warn("initializing image url -> " + imageUrl)
 
     // - style for div image
     let divImg = {
@@ -61,20 +63,22 @@ const Profile = function(){
     let divProgressInner = {
         width: imgProgress + "%"
     }
-
+    
     // - change image for profile photo
     function changeImage () {
         // - get image file
         let imgFile = $('#img_user_url')[0].files[0];
         let imgReader = new FileReader()
         imgReader.readAsDataURL(imgFile)
-
+        
         // - get form data
         const formData = new FormData();
         formData.append("users[image_url]", imgFile);
         
         // - catch when image is loaded
         imgReader.onload = function(e){
+            console.warn("imgreader is read!")
+
             // - set image background
             setLoaded(false)
             setImageUrl(e.target.result)
@@ -82,7 +86,7 @@ const Profile = function(){
 
         // - upload image
         axios
-            .put("http://localhost:3000/api/users/1", formData, config)
+            .put("/api/users/" + reactInit.userID, formData, config)
             .then(function(res){
                 console.warn(res)
             })
