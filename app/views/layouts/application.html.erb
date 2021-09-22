@@ -49,7 +49,11 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#scheduled_tweets_section"
+                    <a 
+                        id="scheduled_tweets_section_anchor"
+                        class="nav-link collapsed" 
+                        href="#"
+                        data-toggle="collapse" data-target="#scheduled_tweets_section"
                         aria-expanded="true" aria-controls="scheduled_tweets_section">
                         <i class="fas fa-fw fa-cog"></i>
                         <span>Scheduler</span>
@@ -156,14 +160,13 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-
         
         <script>
             var view_name = "<%= @view_name %>";
             $(function(){
                 // - if has section name
-                if ($('#' + view_name + '_section').length) {
-                    $('#' + view_name + '_section').toggle("collapse");
+                if ($('#' + view_name + '_section_anchor').length) {
+                    $('#' + view_name + '_section_anchor').trigger("click");
                 }
             });
         </script>
