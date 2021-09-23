@@ -25,9 +25,6 @@ module Api
                     messages.content as message_content,
                     messages.user_id as message_user_id
                 ")
-                .where("
-                    message_groups.user_id = ? OR  message_groups.receiver_id = ?
-                ", params["session_id"], params["session_id"])
                 .joins(
                     "
                         INNER JOIN users
@@ -38,7 +35,17 @@ module Api
                             ON messages.id = message_groups.last_chat_id
                     "
                 )
+                .where(
+                    "(message_groups.user_id = ? OR  message_groups.receiver_id = ?)", 
+                    params["session_id"],
+                    params["session_id"]
+                )
                 .paginate(:page => params[:page])
+            
+            # check if has search term
+            unless params[:search_term].nil? || params[:search_term].empty?
+                @message_group = @message_group.where("(users.name LIKE '%#{params[:search_term].to_s}%')")
+            end
             
             # prepare json
             @message_group.each do |message|

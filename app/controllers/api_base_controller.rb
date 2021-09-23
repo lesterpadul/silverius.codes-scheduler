@@ -3,6 +3,6 @@ class ApiBaseController < ActionController::Base
     before_action :set_global_will_paginate
 
     def set_global_will_paginate
-        WillPaginate.per_page = 5
+        WillPaginate.per_page = 1
     end
 end

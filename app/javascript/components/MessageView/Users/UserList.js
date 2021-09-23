@@ -10,7 +10,7 @@ import axios from "axios";
 function UserList(params){
     // - style for div
     let divContainer = {
-        height: "74.5%",
+        height: "35.7rem",
         overflowY: "auto"
     }
     
@@ -19,6 +19,7 @@ function UserList(params){
         return (
             <User
                 key={item.user.id}
+                messageCode={params.messageCode}
                 changeMessageCode={params.changeMessageCode}
                 userInfo={item}/>
         )
@@ -26,9 +27,11 @@ function UserList(params){
 
     // - return rendered view
     return (
-        <div className="p-3" style={divContainer}>
-            {partialUser}
-        </div>
+        <Fragment>
+            <div className="p-3" style={divContainer}>
+                {partialUser}
+            </div>
+        </Fragment>
     )
 };
 

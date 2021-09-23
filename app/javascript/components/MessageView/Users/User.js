@@ -31,9 +31,12 @@ function User(params){
     // - return rendered view
     return (
         <Fragment>
-            <div className="d-flex mt-1 mb-1" style={divContainer}>
+            <div
+                onClick={() => params.changeMessageCode(params.userInfo.message_group.message_code, params.userInfo) }
+                className={`d-flex mt-1 mb-1 p-1 ${params.messageCode == params.userInfo.message_group.message_code ? "bg-primary rounded text-white" : "" }`}
+                style={divContainer}>
                 <div className="flex-shrink-0 mr-2">
-                    <div className="bg-success" style={divImg}></div>
+                    <div className="bg-success m-1" style={divImg}></div>
                 </div>
                 <div className="flex-grow-1">
                     <span className="fw-bold" style={divMessage}>{params.userInfo.user.name}</span>
@@ -41,7 +44,7 @@ function User(params){
                         {params.userInfo.message.content}
                         <small
                             className="ml-2" 
-                            style={divSmall}>3h ago</small>
+                            style={divSmall}>{params.userInfo.message.update_at}</small>
                     </div>
                 </div>
             </div>

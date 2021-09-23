@@ -21,11 +21,15 @@ function Inbox(){
         height: "45rem"
     }
 
-    // - this function will get all the airlines
+    // - this function will trace message code changes
     useEffect(()=>{
-        console.warn("change message code -> " + messageCode)
 
     }, [messageCode])
+
+    // - this function will trace current user changes
+    useEffect(()=>{
+
+    }, [currentUser])
 
     // - function that changes the current message code
     function changeMessageCode(newMessageCode, currentUser){
@@ -42,7 +46,6 @@ function Inbox(){
         // - set message code
         setMessageCode(newMessageCode);
         setCurrentUser(currentUser);
-        console.warn("changed message code " + messageCode);
     }
     
     // - return rendered view
@@ -57,6 +60,7 @@ function Inbox(){
                         className="row" 
                         style={divRow}>
                         <Users
+                            messageCode={messageCode}
                             changeMessageCode={changeMessageCode} />
                         <Messages 
                             messageCode={messageCode} />

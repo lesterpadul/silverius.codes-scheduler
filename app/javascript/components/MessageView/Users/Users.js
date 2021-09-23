@@ -11,6 +11,8 @@ import axios from "axios";
 function Users(params){
     const [arrUsers, setArrUsers] = useState([])
     const [loaded, setLoaded] = useState(false)
+    const [hasMore, setHasMore] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1)
 
     // - function that changes the current message code
     function listUsers(){
@@ -28,16 +30,38 @@ function Users(params){
         // - else get information
         axios
         .get(
-            '/api/message_groups?search_term=' + searchTerm + '&session_id=' + window.reactGlobal.user_id
+            '/api/message_groups?search_term=' + searchTerm + '&session_id=' + window.reactGlobal.user_id + "&page=" + currentPage
         )
         .then(function(resp){
-            setArrUsers(resp.data.content);
+            console.warn("check respoonse")
+            if (currentPage > 1) {
+                let tmpData = resp.data.content;
+                setArrUsers(arrUsers.concat(tmpData));
+
+            } else {
+                setArrUsers(resp.data.content);
+
+            }
             
+            // - set variables
+            let checkNextPage = resp.data.has_next_page > 0;
+            setHasMore(checkNextPage);
+            setCurrentPage(checkNextPage ? currentPage + 1 : currentPage)
         })
         .catch(function(resp){
             setLoaded(false);
 
         })
+    }
+
+    // - reset list
+    function resetList() {
+        // - set current page
+        setCurrentPage(1)
+        setLoaded(false);
+
+        // - clear cm code and user info
+        params.changeMessageCode('', {})
     }
     
     // - list users
@@ -47,11 +71,20 @@ function Users(params){
     return (
         <div className="col-4 mr-0 pr-0">
             <UserHeader 
-                listUsers={listUsers} />
+                resetList={resetList} />
             <hr className="mb-0" />
             <UserList 
+                messageCode={params.messageCode}
                 changeMessageCode={params.changeMessageCode}
                 arrUsers={arrUsers} />
+            {hasMore}
+            {
+                hasMore &&
+                <button
+                    onClick={() => setLoaded(false) }
+                    className="btn btn-primary btn-block rounded-0">
+                    LOAD MORE</button>
+            }
         </div>
     )
 };

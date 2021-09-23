@@ -59,7 +59,7 @@ function UserHeader(params){
                     <div className="input-group-append">
                         <button 
                             type="button"
-                            onClick={params.listUsers}
+                            onClick={params.resetList}
                             className="btn btn-primary">
                             <i className="fas fa-search fa-sm"></i>
                         </button>
