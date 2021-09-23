@@ -7,25 +7,35 @@
         </div>
         <div class="col-lg-7">
             <div class="p-5">
-                <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Update Account!</h1>
-                </div>
-                
                 <!-- show error message -->
                 <%= render "devise/shared/error_messages", resource: resource %>
                 
                 <!-- form login -->
                 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, :class => "user") do |f| %>
+                    <label class="bg-gradient-secondary text-white p-1 rounded">Personal Info</label>
                     <div class="form-group row">
                         <div class="col-sm-12 mb-3 mb-sm-0">
                             <%= f.text_field :name, :class => "form-control form-control-user",:placeholder => "Name"%>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <%= f.email_field :email, autofocus: true, :placeholder => "Email", :autocomplete => "Email", :class => "form-control form-control-user", :placeholder => "Email Address" %>
                     </div>
-
+                    <div class="form-group row">
+                        <div class="col-sm-12 mb-3 mb-sm-0">
+                            <%= f.text_area :about_me, 
+                                autocomplete: "about-me", 
+                                :class => "form-control form", 
+                                :placeholder => "Tell me about yourself...",
+                                "rows" => 5 %>
+                        </div>
+                    </div>
+                    <%= f.submit "UPDATE PROFILE", :class => "btn btn-info btn-user btn-block mb-4"%>
+                <% end %>
+                
+                <hr class="mb-4">
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, :class => "user") do |f| %>
+                    <label class="bg-gradient-secondary text-white p-1 rounded">Security</label>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <%= f.password_field :password, autocomplete: "new-password", :class => "form-control form-control-user", :placeholder => "Password" %>
@@ -34,29 +44,34 @@
                             <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control form-control-user", :placeholder => "Repeat Password" %>
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <div class="col-sm-12 mb-3 mb-sm-0">
                             <%= f.password_field :current_password, autocomplete: "current-password", :class => "form-control form-control-user", :placeholder => "Current Password" %>
                         </div>
                     </div>
-                    <%= f.submit "UPDATE", :class => "btn btn-primary btn-user btn-block mb-4"%>
+                    <%= f.submit "UPDATE PASSWORD", :class => "btn btn-info btn-user btn-block mb-4"%>
                 <% end %>
                 
                 <!-- social links -->
-                <hr>
-                <%= button_to '/auth/twitter', 
-                        :class => "#{current_user.twitter_token.nil? ? "" : "disabled"} btn btn-primary btn-user btn-block mb-4",
-                        :disabled => current_user.twitter_token.nil? ? false : true,
-                        method: :post do%>
-                    <i class="fab fa-twitter fa-fw"></i> LINK TWITTER
-                <% end %>
-                <%= button_to '/auth/github', 
-                        :class => "#{current_user.github_token.nil? ? "" : "disabled"} btn btn-dark btn-user btn-block",
-                        :disabled => current_user.github_token.nil? ? false : true,
-                        method: :post do%>
-                    <i class="fab fa-github fa-fw"></i> LINK GITHUB
-                <% end %>
+                <hr class="mb-4">
+                <div class="row mb-0">
+                    <div class="col-6">
+                        <%= button_to '/auth/twitter', 
+                                :class => "#{current_user.twitter_token.nil? ? "" : "disabled"} btn btn-primary btn-user btn-block",
+                                :disabled => current_user.twitter_token.nil? ? false : true,
+                                method: :post do%>
+                            <i class="fab fa-twitter fa-fw"></i> LINK TWITTER
+                        <% end %>
+                    </div>
+                    <div class="col-6">
+                        <%= button_to '/auth/github', 
+                                :class => "#{current_user.github_token.nil? ? "" : "disabled"} btn btn-dark btn-user btn-block",
+                                :disabled => current_user.github_token.nil? ? false : true,
+                                method: :post do%>
+                            <i class="fab fa-github fa-fw"></i> LINK GITHUB
+                        <% end %>
+                    </div>
+                </div>
                 
                 <!-- disable account -->
                 <hr/>

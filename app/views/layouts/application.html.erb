@@ -42,6 +42,18 @@
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
                 
+                <!-- message -->
+                <li class="nav-item <%= @view_name == "message_view" ? "active" : "" %>">
+                    <%= link_to message_view_inbox_path,
+                        :class => "nav-link" do %>
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Message</span>
+                    <% end %>
+                </li>
+                
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+                
                 <!-- Heading -->
                 <div class="sidebar-heading">
                     Interface
@@ -56,7 +68,7 @@
                         data-toggle="collapse" data-target="#scheduled_tweets_section"
                         aria-expanded="true" aria-controls="scheduled_tweets_section">
                         <i class="fas fa-fw fa-cog"></i>
-                        <span>Scheduler</span>
+                        <span>Scheduler (Sidekiq Learning)</span>
                     </a>
                     <div id="scheduled_tweets_section" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">

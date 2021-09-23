@@ -45,7 +45,7 @@ class User < ApplicationRecord
         if self.image_url.attached?
             (self.image_url)
         else
-            "https://images.unsplash.com/photo-1517849845537-4d257902454a?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=800&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzMDQzMTg5Mg&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=600"
+            "/sb_admin/img/undraw_profile.svg"
         end
     end
 end

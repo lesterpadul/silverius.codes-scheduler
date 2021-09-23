@@ -1,0 +1,9 @@
+<div id="container_message_view"></div>
+<script>
+window.reactGlobal = {
+    user_id: "<%= current_user.id %>",
+    user_name: "<%= current_user.name %>",
+    user_image: window.location.origin + "<%= url_for(current_user.image_url.attached? ? current_user.image_url : "/sb_admin/img/undraw_profile.svg") %>"
+}
+</script>
+<%= javascript_pack_tag 'message' %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_21_121123) do
+ActiveRecord::Schema.define(version: 2021_09_23_105910) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -31,6 +31,56 @@ ActiveRecord::Schema.define(version: 2021_09_21_121123) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "message_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "receiver_id"
+    t.string "message_code"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "last_chat_id"
+    t.index ["message_code"], name: "index_message_groups_on_message_code"
+    t.index ["receiver_id"], name: "index_message_groups_on_receiver_id"
+    t.index ["status"], name: "index_message_groups_on_status"
+    t.index ["user_id"], name: "index_message_groups_on_user_id"
+  end
+
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "content"
+    t.integer "user_id"
+    t.string "message_code"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_code"], name: "index_messages_on_message_code"
+    t.index ["status"], name: "index_messages_on_status"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "photo_galleries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "user_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["status"], name: "index_photo_galleries_on_status"
+    t.index ["user_id"], name: "index_photo_galleries_on_user_id"
+  end
+
+  create_table "photos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "user_id"
+    t.integer "photo_gallery_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_gallery_id"], name: "index_photos_on_photo_gallery_id"
+    t.index ["status"], name: "index_photos_on_status"
+    t.index ["user_id"], name: "index_photos_on_user_id"
   end
 
   create_table "scheduled_emails", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -76,6 +126,11 @@ ActiveRecord::Schema.define(version: 2021_09_21_121123) do
     t.index ["user_id"], name: "index_scheduled_tweets_on_user_id"
   end
 
+  create_table "user_profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -91,6 +146,7 @@ ActiveRecord::Schema.define(version: 2021_09_21_121123) do
     t.string "name"
     t.string "image_url"
     t.string "twitter_user_name"
+    t.string "about_me"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
