@@ -33,15 +33,15 @@ function Users(params){
             '/api/message_groups?search_term=' + searchTerm + '&session_id=' + window.reactGlobal.user_id + "&page=" + currentPage
         )
         .then(function(resp){
-            console.warn("check respoonse")
+            var tmpData = resp.data.content;
+
+            // - if more than page 1
             if (currentPage > 1) {
-                let tmpData = resp.data.content;
-                setArrUsers(arrUsers.concat(tmpData));
-
-            } else {
-                setArrUsers(resp.data.content);
-
+                tmpData = arrUsers.concat(tmpData);
             }
+            
+            // - set array of users
+            setArrUsers(tmpData);
             
             // - set variables
             let checkNextPage = resp.data.has_next_page > 0;

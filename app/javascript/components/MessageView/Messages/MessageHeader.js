@@ -6,7 +6,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 
 // - airline function
-function MessageHeader(){
+function MessageHeader(params){
     // - style containers
     let divContainer = {
         height: "50px"
@@ -18,21 +18,21 @@ function MessageHeader(){
     let spanTitle = {
         fontWeight: "bold"
     }
-
+    let userLink = "/message_view/profile/" + params.currentUser.user.id 
+    
     // - return rendered view
     return (
         <div 
             className="d-flex mt-1 mb-1 p-3" 
             style={divContainer}>
-            <div className="mr-2 align-self-center">
-                <div 
-                    className="bg-success" 
-                    style={divImage}></div>
-            </div>
             <div className="align-self-center">
                 <span 
                     className="fw-bold" 
-                    style={spanTitle}>Messages</span>
+                    style={spanTitle}>
+                    <a href={userLink}>
+                        {params.currentUser.user.name}
+                    </a>
+                </span>
             </div>
         </div>
     )

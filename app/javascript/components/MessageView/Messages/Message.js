@@ -6,53 +6,30 @@ import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 
 // - airline function
-function Message(){
-    let divContainer = {
-        height: "86.4%",
-        overflowY: "auto"
-    }
-    let divMessageItem = {
-        width: "20px",
-        height: '20px'
-    }
-
+function Message(params){
     // - return rendered view
     return (
-        <div 
-            className="p-3" 
-            style={divContainer}>
-            
-            <div className="d-flex flex-row  mt-2 mb-2">
-                <div className="d-flex align-items-end">
-                    <div 
-                        className="bg-success" 
-                        style={divMessageItem}></div>
-                </div>
-                <div className="d-flex flex-column pl-1">
-                    <div>
-                        <small>3h ago</small>
-                    </div>
-                    <div className="bg-secondary text-white p-2 rounded">
-                        This is some content from a media component.
+        <Fragment>
+            {
+                params.message.user.id != window.reactGlobal.user_id &&
+                <div className="d-flex flex-row  mt-2 mb-2">
+                    <div className="d-flex flex-column pl-1">
+                        <small>{params.message.message.created_at}</small>
+                        <div className="bg-secondary text-white p-2 rounded">{params.message.message.content}</div>
                     </div>
                 </div>
-            </div>
+            }
 
-            <div className="d-flex flex-row-reverse mt-2 mb-2">
-                <div className="d-flex align-items-end">
-                    <div 
-                        className="bg-success" 
-                        style={divMessageItem}></div>
-                </div>
-                <div className="d-flex flex-column pr-1">
-                    <small>3h ago</small>
-                    <div className="bg-primary text-white p-2 rounded">
-                        This is some content from a media component.
+            {
+                params.message.user.id == window.reactGlobal.user_id &&
+                <div className="d-flex flex-row-reverse mt-2 mb-2">
+                    <div className="d-flex flex-column pr-1">
+                        <small>{params.message.message.created_at}</small>
+                        <div className="bg-primary text-white p-2 rounded">{params.message.message.content}</div>
                     </div>
                 </div>
-            </div>
-            
-        </div>
+            }
+        </Fragment>
     )
 };
 

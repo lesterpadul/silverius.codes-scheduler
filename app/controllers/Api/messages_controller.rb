@@ -16,7 +16,8 @@ module Api
                     messages.id as message_id,
                     messages.content as message_content,
                     messages.user_id as message_user_id,
-                    messages.status
+                    messages.status,
+                    messages.created_at as message_created_at
                 ")
                 .where("message_code = ?", params[:id])
                 .joins("
@@ -27,17 +28,16 @@ module Api
             
             # prepare json
             @messages.each do |message|
-                tmp_user = User.find(message.target_user_id)
                 arr_messages.push({
                     "user": {
                         "id": message.target_user_id,
-                        "name": message.target_user_name,
-                        "image_url": url_for(tmp_user.get_image_url)
+                        "name": message.target_user_name
                     },
                     "message": {
                         "id": message.message_id,
                         "content": message.message_content,
-                        "user_id": message.message_user_id
+                        "user_id": message.message_user_id,
+                        "created_at": message.message_created_at,
                     }
                 })
             end
@@ -60,9 +60,23 @@ module Api
                 message_group.update({
                     "last_chat_id" => message.id
                 })
+                
+                # prepare json
+                arr_message = {
+                    "user": {
+                        "id": message.user_id
+                    },
+                    "message": {
+                        "id": message.id,
+                        "content": message.content,
+                        "user_id": message.user_id,
+                        "created_at": message.created_at,
+                    }
+                }
+                
                 render json: {
                     "status" => "ok",
-                    "content" => MessagesSerializer.new(message).as_json
+                    "content" => arr_message.as_json
                 }
             else
                 render json: {

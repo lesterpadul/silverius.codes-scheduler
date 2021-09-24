@@ -6,7 +6,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 
 // - airline function
-function MessageInput(){
+function MessageInput(params){
     // - return rendered view
     return (
         <div className="p-0">
@@ -14,11 +14,13 @@ function MessageInput(){
                 <input 
                     type="text" 
                     className="form-control bg-light border-0 small rounded-0" 
+                    id="input-message-new"
                     placeholder="Search for..." 
                     aria-label="Search" 
                     aria-describedby="basic-addon2" />
                 <div className="input-group-append">
                     <button 
+                        onClick={params.createMessage}
                         className="btn btn-primary rounded-0" 
                         type="button">
                         <i className="fas fa-paper-plane fa-sm"></i>

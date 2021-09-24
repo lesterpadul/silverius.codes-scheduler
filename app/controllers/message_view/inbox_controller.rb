@@ -6,6 +6,7 @@ module MessageView
         end
 
         def profile
+            @id = params[:id]
         end
 
         private

@@ -49,12 +49,10 @@ module Api
             
             # prepare json
             @message_group.each do |message|
-                tmp_user = User.find(message.target_user_id)
                 arr_message_group.push({
                     "user": {
                         "id": message.target_user_id,
                         "name": message.target_user_name,
-                        "image_url": url_for(tmp_user.get_image_url)
                     },
                     "message_group": {
                         "message_code": message.message_code,

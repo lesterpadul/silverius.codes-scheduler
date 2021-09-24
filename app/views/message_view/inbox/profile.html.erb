@@ -1,21 +1,32 @@
-<div>
+<div id="user_profile_page">
     <div class="card mb-4 rounded-0">
         <div class="card-body" style="padding: 0px; height: 45rem;">
             <div class="row">
                 <div class="col-6  mt-1 mb-1">
                     <div class="d-flex p-3">
                         <div class="mr-2">
-                            <div class="bg-success" style="width: 70px; height: 70px;"></div>
+                            <div 
+                                class="bg-success" 
+                                v-bind:style="{ 
+                                    width: '70px', 
+                                    height: '70px', 
+                                    backgroundSize: 'cover', 
+                                    backgroundPosition: 'center',
+                                    backgroundImage: 'url(' + user_info.image_url + ')'
+                                }"></div>
                         </div>
                         <div class="d-flex flex-column">
-                            <span class="fw-bold" style="font-weight: bold; font-size: 25px;">Lester Padul</span>
-                            <div>padullester@gmail.com</div>
+                            <span class="fw-bold" style="font-weight: bold; font-size: 25px;">{{user_info.name}}</span>
+                            <div>{{user_info.email}}</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="d-flex flex-row-reverse align-items-start p-3">
-                       <a href="#" class="btn btn-info btn-icon-split rounded-0 btn-md">
+                       <a 
+                            href="javascript:void(0)" 
+                            v-on:click="show_donation_modal()"
+                            class="btn btn-info btn-icon-split rounded-0 btn-md">
                             <span class="icon text-white-50">
                                 <i class="fas fa-hand-holding-usd"></i>
                             </span>
@@ -28,10 +39,22 @@
                 <div class="col-12">
                     <ul class="nav nav-pills p-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Photos</a>
+                            <a 
+                                v-bind:class="[
+                                    current_state == 'images' ? 'active' : '',
+                                    'nav-link'
+                                ]" 
+                                v-on:click="init_images()"
+                                href="javascript:void(0);">Photos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Donations</a>
+                            <a 
+                                v-bind:class="[
+                                    current_state == 'donations' ? 'active' : '',
+                                    'nav-link'
+                                ]"
+                                v-on:click="init_donations()"
+                                href="javascript:void(0);">Donations</a>
                         </li>
                     </ul>
                 </div>
@@ -40,6 +63,72 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script>
+    window.globalVue = {
+        user_id: "<%= @id%>"
+    }
+    $(function(){
+        new Vue({
+            el: '#user_profile_page',
+            mounted:function(){
+                // - load user information
+                this.load_user_info();
+                
+            },
+            methods: {
+                // - user methods
+                load_user_info: function(){
+                    let self = this
+                    $.ajax(
+                        {
+                            method: 'get',
+                            url: "/api/users/" + window.globalVue.user_id,
+                            data: {}
+                        }
+                    )
+                    .done(function(res){
+                        self.user_info = {
+                            id: res.id,
+                            name: res.name,
+                            email: res.email,
+                            image_url: res.image_url,
+                        }
+                    })
+                },
 
-<div id="container_message_view"></div>
-<%= javascript_pack_tag 'message' %>
+                // - donation methods
+                init_donations: function(){
+                    this.current_state = "donations"
+                    this.show_donations()
+                },
+                show_donation_modal:function(){},
+                add_donations: function(){},
+                show_donations: function(){},
+
+                // - image methods
+                init_images: function(){
+                    this.current_state = "images"
+                },
+                show_images: function(){},
+                upload_images: function(){},
+                edit_image: function(){},
+                delete_image: function(){}
+            },
+            data: {
+                current_state: "",
+                user_info: {
+                    id: 0,
+                    name: "",
+                    email: "",
+                    image_url: ""
+                },
+                donations: {
+                    list: [],
+                    total_donation: 0
+                },
+                images: [ 1, 2, 3, 4]
+            }
+        });
+    })
+</script>
