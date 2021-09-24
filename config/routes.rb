@@ -11,9 +11,11 @@ Rails.application.routes.draw do
   
   # name space API
   namespace :api do
+    get '/donation_history/:user_id' => 'donations#donation_history'
     resources :users
     resources :message_groups
     resources :messages
+    resources :donations
   end
   
   # name space API

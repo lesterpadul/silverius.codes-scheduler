@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  total_donations: 1
+  total_donations_day: 1
+  total_donations_week: 1
+  total_donations_month: 1
+
+two:
+  user_id: 1
+  total_donations: 1
+  total_donations_day: 1
+  total_donations_week: 1
+  total_donations_month: 1

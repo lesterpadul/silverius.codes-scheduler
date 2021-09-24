@@ -62,11 +62,43 @@
             <hr class="m-0">
         </div>
     </div>
+    <!-- Button trigger modal -->
+    <div 
+        class="modal fade show" 
+        id="modal_donation" 
+        tabindex="-1" 
+        role="dialog" 
+        aria-labelledby="exampleModalLabel" 
+        aria-modal="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Donate to {{user_info.name}}!
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">Amount:</label>
+                        <input 
+                            type="number" 
+                            min=1
+                            val=1
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Leave a note:</label>
+                        <textarea name="" id="" cols="30" rows="5" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 <script>
     window.globalVue = {
-        user_id: "<%= @id%>"
+        user_id: "<%= @id %>"
     }
     $(function(){
         new Vue({
@@ -102,7 +134,9 @@
                     this.current_state = "donations"
                     this.show_donations()
                 },
-                show_donation_modal:function(){},
+                show_donation_modal:function(){
+                    $('#modal_donation').modal('show');
+                },
                 add_donations: function(){},
                 show_donations: function(){},
 
